@@ -1,3 +1,6 @@
 node_modules
-.env
+.env    /// What is this? im not using any databases in this assignment? 
+why do i have  to supply my host, user and password?  
+
+
 package-lock.json
