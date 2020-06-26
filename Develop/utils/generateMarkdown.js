@@ -4,8 +4,8 @@ function generateMarkdown(data) {
 # ${data.title}
 ${data.description}
 #Table of Contents 
-${data.toc}
-#Table of Contents
+
+#Contents
 ${data.intallation}
 #Usage
 ${data.usage}
@@ -16,8 +16,11 @@ ${data.contributing}
 #Tests
 ${data.tests}
 #GitHub Info
+${data.githubemail}
+${data.githubusername}
 ${data.profilepicture}
-#${data.githubemail}
+
+
 
 `;
 }

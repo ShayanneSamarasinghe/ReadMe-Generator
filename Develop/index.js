@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util"); 
 const axios = require("axios");
+const generateMarkdown = require("./utils/generateMarkdown");
 
 var profilePic = ""
 
@@ -19,7 +20,7 @@ const questions = [
     {
         type: "input",
         name: "description",
-        message: "Description?"
+        message: "Please provide a brief description of your project and some installation steps?"
     },
     {
         type: "input",
@@ -29,13 +30,13 @@ const questions = [
     {
         type: "List",
         name: "Licenses",
-        message: "Licenses?",
-        choices: ["MIT", "ISC"]
+        message: "What licenses, if any, did you use?",
+        choices: ["MIT", "ISC", "None"]
     },
     {
         type: "input",
         name: "Contributors",
-        message: "Contributors?"
+        message: "Who were the contributors on this project?"
     },
     {
         type: "input",
@@ -45,57 +46,57 @@ const questions = [
     {
         type: "input",
         name: "githubemail",
-        message: "github email?"
+        message: "What is your github email?"
     },
     {
         type: "input",
         name: "githubusername",
         message: "What is your github username?",
-        validate: function(data){
-            axios.get(`https://api.github.com/user/${data}`).then(function(res){
-                if(res.data.login){
-                    console.log(res);
-                    profilePic = res.data.avatar_url;
-                    return true
-
-                }else{
-                    return "Username not found"
-
-                }
-                
-            }).catch(function(err){
-                return "Username not found"
-            })
-        }
+        
     },
-
-      
-
       
 
 
 ];
 
-axios.get(`https://api.github.com/users/ShayanneSamarasinghe`).then(function(res){
-    console.log(res);
-}).catch(function(err){
-    console.log(err)
-})
+
+function promptquestions(data){
+        console.log(data)
+        axios.get(`https://api.github.com/user/${data.githubusername}`).then(function(res){
+            profilePic = res.data.avatar_url
 
 
-// FUNCTION TO GENERATE PROPER FILETYPE? ("README.md", md) 
 
-function writeToFile("README.md", data) {
+        })
+    }
+
+
+
+
+// FUNCTION TO GENERATE PROPER FILETYPE ("README.md", md) //
+// var newfile = "README.md"
+// var md = generateMarkdown(data)
+
+function writeToFile(newfile, md) {
 }
 
 
 
 // FUNCTION FOR USER PROMPTS? //
 function init(){    
-    return inquirer.prompt(questions)
+    inquirer.prompt(questions)
+    .then(function(answers){
+        // axios.get(`https://api.github.com/user/${answers.githubusername}`).then(function(res){
+        //     profilePic = res.data.avatar_url
+
+
+
+        // })
+    }
   
-}
+    )}
 
 
-FUNCTION TO INITIALIZE USERPROMPT FUNCTION // 
-init();
+// FUNCTION TO INITIALIZE USERPROMPT FUNCTION // 
+init()
+    
