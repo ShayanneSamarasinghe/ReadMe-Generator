@@ -1,102 +1,124 @@
-
 const inquirer = require("inquirer");
 const fs = require("fs");
-const util = require("util"); 
+const util = require("util");
 const axios = require("axios");
 const generateMarkdown = require("./utils/generateMarkdown");
 
-var profilePic = ""
+var profilePic = "";
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-
-
 const questions = [
-    {
-        type: "input",
-        name: "name",
-        message: "What is the title of your project?"
-    },
-    {
-        type: "input",
-        name: "description",
-        message: "Please provide a brief description of your project and some installation steps?"
-    },
-    {
-        type: "input",
-        name: "Usage",
-        message: "What is the usage of this project?"
-    },
-    {
-        type: "List",
-        name: "Licenses",
-        message: "What licenses, if any, did you use?",
-        choices: ["MIT", "ISC", "None"]
-    },
-    {
-        type: "input",
-        name: "Contributors",
-        message: "Who were the contributors on this project?"
-    },
-    {
-        type: "input",
-        name: "Testing",
-        message: "What are, if any, some of the frameworks you used for testing?"
-    },
-    {
-        type: "input",
-        name: "githubemail",
-        message: "What is your github email?"
-    },
-    {
-        type: "input",
-        name: "githubusername",
-        message: "What is your github username?",
-        
-    },
-      
-
-
+  {
+      type: "input",
+      name: "title",
+      message: "What is the title of your project?"
+  },
+  {
+      type: "input",
+      name: "description",
+      message: "Please provide a brief description of your project and some installation steps?"
+  },
+  {
+    type: "input",
+    name: "installation",
+    message: "What are the instructions for installation?"
+},
+  {
+      type: "input",
+      name: "Usage",
+      message: "What is the usage of this project?"
+  },
+  {
+      type: "list",
+      name: "licenses",
+      message: "What licenses, if any, did you use?",
+      choices: ["MIT", "ISC", "None"]
+  },
+  {
+      type: "input",
+      name: "contributors",
+      message: "Who were the contributors on this project?"
+  },
+  {
+      type: "input",
+      name: "tests",
+      message: "What are, if any, some of the frameworks you used for testing?"
+  },
+  {
+      type: "input",
+      name: "githubemail",
+      message: "What is your github email?"
+  },
+  {
+    type: "input",
+    name: "githubusername",
+    message: "What is your github username?",
+    
+    // validate: function (data) {
+    //     console.log('validatine')
+    //   axios
+    //     .get(`https://api.github.com/user/${data.githubusername}`)
+    //     .then(function (res) {
+    //         console.log("made call")
+    //       profilePic = res.data.avatar_url;
+    //       if (profilePic) {
+    //         return true;
+    //       } else {
+    //         return "Incorrect githubusername";
+    //       }
+    //     })
+    //     .catch(function (err) {
+    //       return "Incorrect githubusername";
+    //     });
+    // },
+  },
 ];
 
+// axios
+// .get(`https://api.github.com/user/wesycool`)
+// .then(function (res) {
+//     console.log("made call")
+//   profilePic = res.data.avatar_url;
+//   if (profilePic) {
+//     return true;
+//   } else {
+//     return "Incorrect githubusername";
+//   }
+// })
+// .catch(function (err) {
+//   return "Incorrect githubusername";
+// });
 
-function promptquestions(data){
-        console.log(data)
-        axios.get(`https://api.github.com/user/${data.githubusername}`).then(function(res){
-            profilePic = res.data.avatar_url
-
-
-
-        })
-    }
-
-
-
-
-// FUNCTION TO GENERATE PROPER FILETYPE ("README.md", md) //
-// var newfile = "README.md"
-// var md = generateMarkdown(data)
-
-function writeToFile(newfile, md) {
+function promptquestions(data) {
+  console.log(data);
+  axios
+    .get(`https://api.github.com/user/${data.githubusername}`)
+    .then(function (res) {
+      profilePic = res.data.avatar_url;
+      console.log(res)
+      if (profilePic) {
+        return true;
+      } else {
+        return "Incorrect githubusername";
+      }
+    })
+    .catch(function (err) {
+      return "Incorrect githubusername";
+    });
 }
 
-
-
 // FUNCTION FOR USER PROMPTS? //
-function init(){    
-    inquirer.prompt(questions)
-    .then(function(answers){
-        // axios.get(`https://api.github.com/user/${answers.githubusername}`).then(function(res){
-        //     profilePic = res.data.avatar_url
+function init() {
+  inquirer.prompt(questions).then(function (answers) {
+      var temp = answers;
+      temp.badge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+    var newfile = "README.md";
+    var md = generateMarkdown(temp);
 
+    writeFileAsync(newfile, md);
+  });
+}
 
-
-        // })
-    }
-  
-    )}
-
-
-// FUNCTION TO INITIALIZE USERPROMPT FUNCTION // 
-init()
-    
+// FUNCTION TO INITIALIZE USERPROMPT FUNCTION //
+init();
