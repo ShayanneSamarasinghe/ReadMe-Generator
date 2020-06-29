@@ -4,6 +4,9 @@ const util = require("util");
 const axios = require("axios");
 const generateMarkdown = require("./utils/generateMarkdown");
 
+var MITbadge = https://img.shields.io/badge/License-MIT-yellow.svg
+var ISCbadge = https://img.shields.io/badge/License-ISC-blue.svg
+
 var profilePic = "";
 
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -34,6 +37,14 @@ const questions = [
       name: "licenses",
       message: "What licenses, if any, did you use?",
       choices: ["MIT", "ISC", "None"]
+    //  if(choices: === "MIT"){
+    //     //  return urlllll --- MIT badge ////
+
+    //  }else if(choices: === "ISC"){
+    //     //  return urllllll --- ics badge //// 
+    //  }else{
+    //      return "No badges were selected"
+    //  }
   },
   {
       type: "input",
@@ -111,10 +122,8 @@ function promptquestions(data) {
 // FUNCTION FOR USER PROMPTS? //
 function init() {
   inquirer.prompt(questions).then(function (answers) {
-      var temp = answers;
-      temp.badge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
     var newfile = "README.md";
-    var md = generateMarkdown(temp);
+    var md = generateMarkdown(answers);
 
     writeFileAsync(newfile, md);
   });
@@ -122,3 +131,5 @@ function init() {
 
 // FUNCTION TO INITIALIZE USERPROMPT FUNCTION //
 init();
+
+
