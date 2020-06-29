@@ -4,8 +4,7 @@ const util = require("util");
 const axios = require("axios");
 const generateMarkdown = require("./utils/generateMarkdown");
 
-var MITbadge = https://img.shields.io/badge/License-MIT-yellow.svg
-var ISCbadge = https://img.shields.io/badge/License-ISC-blue.svg
+
 
 var profilePic = "";
 
@@ -20,7 +19,7 @@ const questions = [
   {
       type: "input",
       name: "description",
-      message: "Please provide a brief description of your project and some installation steps?"
+      message: "Please provide a brief description of your project?"
   },
   {
     type: "input",
@@ -37,14 +36,7 @@ const questions = [
       name: "licenses",
       message: "What licenses, if any, did you use?",
       choices: ["MIT", "ISC", "None"]
-    //  if(choices: === "MIT"){
-    //     //  return urlllll --- MIT badge ////
-
-    //  }else if(choices: === "ISC"){
-    //     //  return urllllll --- ics badge //// 
-    //  }else{
-    //      return "No badges were selected"
-    //  }
+  
   },
   {
       type: "input",
