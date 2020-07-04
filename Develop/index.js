@@ -61,7 +61,7 @@ const questions = [
     // validate: function (data) {
     //     console.log('validatine')
     //   axios
-    //     .get(`https://api.github.com/user/${data.githubusername}`)
+    //     .get(`https://api.github.com/users/${data.githubusername}`)
     //     .then(function (res) {
     //         console.log("made call")
     //       profilePic = res.data.avatar_url;
