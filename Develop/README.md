@@ -1,34 +1,35 @@
 
-  # Something Something 
+  # Example Name 
 
-  Something Something Something Something SOmething Something
+  This is an example of what a description might look like. This is purely an example. 
 
   
-  #Installation
+  ##Installation
 
-  Something Something Something 
+  This is an example of what the installation instructions might look like. This is purely an example.  
 
-  #Usage
+  ##Usage
   undefined 
 
-  #License 
+  ##License 
 
-  ![](https://img.shields.io/badge/License-ISC-blue.svg)
+  ![](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-  #Contributors
+  ##Contributors
 
-  somethin
+  I was the sole contributor on the project
 
-  #Tests
+  ##Tests
 
-  Something Something
+  No frameworks were used aside from light debugging runs. 
 
-  #GitHub Info
+  ##GitHub Info
 
-  Something@Something.com
+  shayannesamarasinghe@gmail.com
 
-  SomeTHING
+  ShayanneSamarasinghe
 
+  
  
 
 
